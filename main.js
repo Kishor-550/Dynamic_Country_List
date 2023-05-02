@@ -5,17 +5,28 @@ const countryOutput = document.getElementById("country-output");
 const stateOutput = document.getElementById("state-output");
 const cityOutput = document.getElementById("city-output");
 
+async function getToken() {
+	const response = await fetch(`https://www.universal-tutorial.com/api/getaccesstoken`, {
+		method: "GET",
+		headers: {
+			"api-token": "5G63Z8Pifh6ZHt4N2togj-GElSMBCwt9hK4pIMIM1j3y0HsbZTpD_V-89QK1uxEStNQ",
+			Accept: "application/json",
+			"user-email": "utchikanna3108@gmail.com",
+		},
+	});
+	return response.json();
+}
 async function getData(endpoint) {
+	const authToken = await getToken();
 	const response = await fetch(`https://www.universal-tutorial.com/api/${endpoint}`, {
 		method: "GET",
 		headers: {
 			Authorization:
-				"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJhc2tAdW5pdmVyc2FsLXR1dG9yaWFsLmNvbSIsImFwaV90b2tlbiI6IlQ2VlBOUmZXbkxFbmdsMHd2djctZ1d2Y09KRHFPSkptc3ZoNkNOdGo5a3p1Z1RSYkhvdXVET1NXeTdzYmJzdG5taDAifSwiZXhwIjoxNjgyNjgwNzYzfQ.-_bf1xd3K9ZD_3g89PBjrYW0LVIdFeGL8DV1EpHSS4M",
+				`Bearer ${authToken.auth_token}`,
 			Accept: "application/json",
 		},
 	});
-	const data = await response.json();
-	return data;
+	return await response.json();
 }
 
 async function showData() {
@@ -28,7 +39,6 @@ async function showData() {
 	cityOutput.innerText = districtList[0]["city_name"];
 	for (const element of dataArr) {
 		option = document.createElement("option");
-		console.table({ Country_Code: element["country_phone_code"], Country_Code: element["country_short_name"] });
 
 		option.value = element["country_name"];
 		option.text = element["country_name"];
