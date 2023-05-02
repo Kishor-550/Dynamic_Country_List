@@ -17,9 +17,36 @@ This is a simple web application that allows users to select a country, state, a
 - CSS
 - JavaScript
 
-## Installation and Usage
+## Usage
 
-To run the application, simply open the `index.html` file in your web browser.
+To use the web page, simply open the `index.html` file in your web browser. The page will load with the first option in each dropdown menu pre-selected.
+
+To change your selection, simply click on the desired option in each dropdown menu. The selected options will be displayed on the screen.
+
+## Code
+
+The web page is built using HTML, CSS, and JavaScript. The JavaScript code makes use of the `fetch` API to retrieve data from an external API and populate the dropdown menus.
+
+The code is organized into three functions:
+
+### `getToken()`
+
+This function retrieves an access token from an external API, which is required for all subsequent API requests.
+
+### `getData(endpoint)`
+
+This function retrieves data from an external API, using the access token retrieved by `getToken()`. The `endpoint` parameter specifies the API endpoint to retrieve data from (e.g. `countries`, `states/India`, `cities/Karnataka`).
+
+### `showData()`
+
+This function populates the dropdown menus with data retrieved from the external API, and displays the selected options on the screen. It also sets up event listeners to handle changes to the selected options.
+
+## Dependencies
+
+This web page relies on two external dependencies:
+
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API): used to retrieve data from the external API.
+- [Universal Tutorial API](https://www.universal-tutorial.com/rest-apis/): provides the data for the dropdown menus.
 
 ## API Key
 
